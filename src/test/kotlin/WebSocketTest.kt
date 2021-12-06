@@ -28,12 +28,10 @@ class WebSocketTest {
             }
             handleWebSocketConversation("/") {
                 incoming, outgoing ->
-                val getVersion = PacketType.GetVersion
-                val sendVersion = PacketType.SendVersion
-                val bytes = Packet.toByteArray(getVersion, EmptyPacketData)
+                val bytes = Packet.toByteArray(PacketType.GetVersion, EmptyPacketData)
                 outgoing.send(Frame.Binary(true, bytes))
                 val rawPacket = Packet.fromByteArray(incoming.receive().readBytes())
-                val packet = rawPacket.toPacket(sendVersion)
+                val packet = rawPacket.toPacket(PacketType.SendVersion)
                 assertNotNull(packet)
                 val packetData = packet.data
                 assertIs<IntData>(packetData)
