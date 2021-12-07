@@ -14,8 +14,7 @@ class WebSocketTest {
     @Test
     fun getVersionTest() {
         withTestApplication(Application::application) {
-            handleWebSocketConversation("/") {
-                incoming, outgoing ->
+            handleWebSocketConversation("/") { incoming, outgoing ->
                 outgoing.sendPacket(PacketType.GetVersion, EmptyPacketData)
                 incoming.testReceivePacket(PacketType.SendVersion) {
                     assertEquals(it.int, PacketVersion)
