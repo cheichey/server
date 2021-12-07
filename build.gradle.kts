@@ -12,8 +12,8 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.6.0")
-    testImplementation("org.jetbrains.kotlin:kotlin-test:1.6.0")
+    implementation(kotlin("stdlib"))
+    testImplementation(kotlin("test"))
     implementation("com.github.cheatank:common:1.0.0-SNAPSHOT")
     implementation("io.ktor:ktor-server-core:1.6.6")
     implementation("io.ktor:ktor-server-cio:1.6.6")
