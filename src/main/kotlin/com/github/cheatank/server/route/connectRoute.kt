@@ -10,7 +10,7 @@ suspend fun DefaultWebSocketServerSession.connectRoute() {
     for (frame in incoming) {
         when (frame) {
             is Frame.Binary -> {
-                val rawPacket = Packet.fromByteArray(frame.readBytes())
+                val rawPacket = Packet.fromByteArray(frame.readBytes()) ?: return
                 processPacket(rawPacket)
             }
             is Frame.Close -> {

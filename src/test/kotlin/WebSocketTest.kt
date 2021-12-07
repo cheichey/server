@@ -31,6 +31,7 @@ class WebSocketTest {
                 val bytes = Packet.toByteArray(PacketType.GetVersion, EmptyPacketData)
                 outgoing.send(Frame.Binary(true, bytes))
                 val rawPacket = Packet.fromByteArray(incoming.receive().readBytes())
+                assertNotNull(rawPacket)
                 val packet = rawPacket.toPacket(PacketType.SendVersion)
                 assertNotNull(packet)
                 val packetData = packet.data
