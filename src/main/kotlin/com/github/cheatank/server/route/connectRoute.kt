@@ -6,11 +6,13 @@ import io.ktor.http.cio.websocket.close
 import io.ktor.websocket.DefaultWebSocketServerSession
 
 suspend fun DefaultWebSocketServerSession.connectRoute() {
-    for (frame in incoming) when (frame) {
-        is Frame.Binary ->
-            (frame.readPacket() ?: return).also {
-                processPacket(it)
-            }
-        is Frame.Close -> close()
+    for (frame in incoming) {
+        when (frame) {
+            is Frame.Binary ->
+                (frame.readPacket())?.let {
+                    processPacket(it)
+                } ?: continue
+            is Frame.Close -> close()
+        }
     }
 }
