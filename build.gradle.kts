@@ -17,6 +17,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core:1.6.6")
     implementation("io.ktor:ktor-server-cio:1.6.6")
     implementation("io.ktor:ktor-websockets:1.6.6")
+    implementation("io.insert-koin:koin-ktor:3.1.4")
     testImplementation(kotlin("test"))
     testImplementation("io.ktor:ktor-server-test-host:1.6.6")
 

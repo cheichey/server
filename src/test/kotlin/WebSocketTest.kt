@@ -6,6 +6,7 @@ import com.github.cheatank.server.application
 import io.ktor.application.Application
 import io.ktor.http.cio.websocket.Frame
 import io.ktor.server.testing.withTestApplication
+import org.koin.dsl.module
 import utils.sendPacket
 import utils.testReceivePacket
 import kotlin.test.Test
@@ -31,6 +32,19 @@ class WebSocketTest {
             handleWebSocketConversation("/") { incoming, outgoing ->
                 outgoing.close()
                 assertIs<Frame.Close>(incoming.receive())
+            }
+        }
+    }
+
+    @Test
+    fun joinQueueTest() {
+        withTestApplication({
+            val modules = module {}
+            application(true, modules)
+        }) {
+            handleWebSocketConversation("/") { incoming, outgoing ->
+                outgoing.sendPacket(PacketType.JoinQueue, EmptyPacketData)
+                incoming.testReceivePacket(PacketType.JoinQueue) {}
             }
         }
     }
